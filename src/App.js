@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Portal from './portal';
+import React, { useState } from 'react';
 
 function App() {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Outside the portal</h1>
+      <button type='button' onClick={handleOpen}>Open Portal</button>
+      <Portal isOpen={open} onClose={handleClose}>
+        <>
+        <h1>Inside the portal</h1>
+        <button type='button' onClick={handleClose} >Close</button>
+        </>
+      </Portal>
     </div>
   );
 }
